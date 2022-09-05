@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/main.js" async defer></script>
+    <title>DeckMem</title>
+    <style>
+        body {
+            background-color: #69777e;
+            margin: 0;
+        }
+
+        .wrap {
+            display: flex !important;
+            flex-direction: column !important;
+            flex-wrap: wrap !important;
+        }
+
+        .center-horizontal {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        .heading {
+            border-radius: 0 0 15px 15px;
+        }
+        input {
+            height: 50px;
+            width: 250px;
+            font-size: 25px;
+            border-radius: 15px;
+            border: none;
+        }
+        button {
+            height: 50px;
+            width: 150px;
+            font-size: 30px;
+            border-radius: 15px;
+            border: none;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- 
+    <div class="heading center-horizontal" style="background-color:#2d3336; width: 300px; height: 50px; transform: translate(190px, 0);">
+        <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 5px; padding: 0;">Rehersal</h1>
+    </div> -->
+    <div class="heading center-horizontal" style="background-color:#383f43; width: 400px; height: 70px;">
+        <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 15px; padding: 0;">Encoding</h1>
+    </div>
+
+
+
+
+
+    <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 150px;" id="cardImg">
+
+    <div style="position: relative; bottom: -627px;">
+        <div class="center-horizontal" style="bottom: 230px;">
+            <div style="position: relative; right: 21px">
+                <input type="image" src="/static/icons8-refresh-60.png" name="saveForm" class="btTxt submit" id="saveForm" style="position: relative; top: 2.5px; width:40px; height: 40px; display: inline;" onclick="randomize();"/>
+    
+                <input type="text" name="" placeholder="Noun (Person)" style="position: relative; bottom: 10px;" id="person">
+            </div>
+        </div>
+        <div class="center-horizontal" style="bottom: 170px;">
+            <input type="text" name="" placeholder="Verb (With ing)" style="position: relative; bottom: 10px;" id="verb">
+        </div>
+        <div class="center-horizontal" style="bottom: 110px;">
+            <input type="text" name="" placeholder="Noun (Thing)" style="position: relative; bottom: 10px;" id="thing">
+        </div>
+        <button class="center-horizontal" style="bottom: 60px; left: 42vw; background-color: rgb(168, 78, 78);" onclick="lastCard();">Back</button>
+        <button class="center-horizontal" style="bottom: 60px; left: 58vw; background-color: rgb(65, 174, 65);" onclick="nextCard();">Next</button>   
+    </div>
+
+    <button class="center-horizontal" style="position: absolute; bottom: 20px; display: none;" id="rehersal-button">Rehersal</button>
+
+    <span>
+        <ul style="list-style: none; margin: 0; padding: 5px;" id="cardList">
+        </ul>
+    </span>
+</body>
+</html>
