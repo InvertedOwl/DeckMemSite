@@ -14,6 +14,9 @@ fetch("/static/cards.json").then(response => response.json()).then((json) => {
 
     if (localStorage.getItem("cards") != undefined) {
         savedCard = JSON.parse(localStorage.getItem("cards"));
+        if (Object.keys(JSON.parse(localStorage.getItem("cards"))).length == 52) {
+            document.getElementById("rehersal-button").style.display = "block";
+        }
         Object.keys(JSON.parse(localStorage.getItem("cards"))).forEach(element => {
             console.log("Saved: " + element);
             let data = JSON.parse(localStorage.getItem("cards"))[element];
@@ -89,3 +92,63 @@ function randomize() {
         personInput.value = json.names[Math.floor(Math.random() * json.names.length)]
     })
 }
+
+function rehersal() {
+    document.getElementById("Encoding").style.display = "none";
+    document.getElementById("Rehearsal").style.display = "block";
+    newQuestion();
+}
+
+let correctId = 0;
+
+function newQuestion() {
+    for (let i = 0; i < 4; i++) {
+        document.getElementById(i + "choice").src = `/static/cards/${Object.keys(savedCard)[Math.floor(Math.random() * Object.keys(savedCard).length)]}`;
+        document.getElementById(i + "choice").parentElement.removeAttribute("class");
+
+    }
+
+
+    let randCard = Object.keys(savedCard)[Math.floor(Math.random() * Object.keys(savedCard).length)];
+    let randItem = savedCard[randCard][Object.keys(savedCard[randCard])[Math.floor(Math.random() * Object.keys(savedCard[randCard]).length)]]
+
+    document.getElementById("question").innerHTML = `Which card is assosiated with the phrase <span style="color: rgb(134, 134, 220);">${randItem}</span>`
+
+    console.log("Card: " + randCard + ", RandItem: " + randItem);
+
+    correctId = Math.floor(Math.random() * 4);
+
+    document.getElementById(correctId + "choice").src = `/static/cards/${randCard}`;
+}
+
+let correct = 0;
+let total = 0;
+let ontoNext = false;
+function clicked(button) {
+    for (let i = 0; i < 4; i++) {
+        document.getElementById(i + "choice").parentElement.classList.add("wrong");
+        
+    }
+    document.getElementById(correctId + "choice").parentElement.classList.add("right");
+
+    if (correctId == button) {
+        console.log("Correct!");
+        correct += 1;
+    }
+    total += 1;
+    ontoNext = !ontoNext
+
+    document.getElementById("percent").innerHTML = Math.floor(((correct / total) * 100)) + "%"
+
+    if (!ontoNext)
+    newQuestion();
+}
+
+
+// TODO
+// . Randomly pick card and save the index
+// . Pick element of card
+// . Pick 3 other random cards
+// . Put them all as buttons randomly
+// . On click for all buttons and special effect for right button
+// . Redo
