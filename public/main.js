@@ -18,12 +18,21 @@ fetch("/static/cards.json").then(response => response.json()).then((json) => {
             document.getElementById("rehersal-button").style.display = "block";
         }
         Object.keys(JSON.parse(localStorage.getItem("cards"))).forEach(element => {
-            console.log("Saved: " + element);
+            console.log("index: " + Object.keys(JSON.parse(localStorage.getItem("cards"))).indexOf(element));
             let data = JSON.parse(localStorage.getItem("cards"))[element];
-            document.getElementById("cardList").innerHTML += `
-            <li id="${element}">
-                <p style="margin: 2px;"><img src="/static/cards/${element}" style="width: 20px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
-            </li>`;
+
+            if (Object.keys(JSON.parse(localStorage.getItem("cards"))).indexOf(element) > 25) {
+                document.getElementById("cardList").innerHTML += `
+                <li id="${element}" style="position: relative;">
+                    <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${element}" style="width: 22px; vertical-align: middle"></p>
+                </li>`;
+            } else {
+                document.getElementById("cardList").innerHTML += `
+                <li id="${element}">
+                    <p style="margin: 2px;"><img src="/static/cards/${element}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+                </li>`;
+            }
+
         });
         personInput.value = JSON.parse(localStorage.getItem("cards"))[Object.keys(cardData)[cardIndex]].person;
         verbInput.value = JSON.parse(localStorage.getItem("cards"))[Object.keys(cardData)[cardIndex]].verb;
@@ -47,14 +56,30 @@ function nextCard() {
     thingInput.value = "T";
 
     if (!savedCard[Object.keys(cardData)[cardIndex]]) {
-        document.getElementById("cardList").innerHTML += `
-    <li id="${Object.keys(cardData)[cardIndex]}">
-        <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 20px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
-    </li>`;
+        if (Object.keys(savedCard).length > 26) {
+            document.getElementById("cardList").innerHTML += `
+            <li id="${Object.keys(cardData)[cardIndex]}" style="position: relative;">
+                <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle"></p>
+            </li>`;
+        } else {
+            document.getElementById("cardList").innerHTML += `
+            <li id="${Object.keys(cardData)[cardIndex]}">
+                <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+            </li>`;
+        }
+
+
 
     } else {
-        document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `        <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 20px; vertical-align: middle">  ${savedCard[Object.keys(cardData)[cardIndex]].person} || ${savedCard[Object.keys(cardData)[cardIndex]].verb} || ${savedCard[Object.keys(cardData)[cardIndex]].thing}</p>
-        `
+        if (cardIndex > 25) {
+            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `        <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle"></p>
+            `
+        } else {
+            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `         <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+
+            `
+        }
+
     }
     savedCard[Object.keys(cardData)[cardIndex]] = data;
     localStorage.setItem("cards", JSON.stringify(savedCard))
@@ -98,6 +123,10 @@ function rehersal() {
     document.getElementById("Rehearsal").style.display = "block";
     newQuestion();
 }
+function encoding() {
+    document.getElementById("Encoding").style.display = "block";
+    document.getElementById("Rehearsal").style.display = "none";
+}
 
 let correctId = 0;
 
@@ -112,7 +141,7 @@ function newQuestion() {
     let randCard = Object.keys(savedCard)[Math.floor(Math.random() * Object.keys(savedCard).length)];
     let randItem = savedCard[randCard][Object.keys(savedCard[randCard])[Math.floor(Math.random() * Object.keys(savedCard[randCard]).length)]]
 
-    document.getElementById("question").innerHTML = `Which card is assosiated with the phrase <span style="color: rgb(134, 134, 220);">${randItem}</span>`
+    document.getElementById("question").innerHTML = `Which card is assosiated with the phrase <span style="color: rgb(228, 173, 100);">${randItem}</span>`
 
     console.log("Card: " + randCard + ", RandItem: " + randItem);
 
@@ -144,11 +173,11 @@ function clicked(button) {
     newQuestion();
 }
 
-
-// TODO
-// . Randomly pick card and save the index
-// . Pick element of card
-// . Pick 3 other random cards
-// . Put them all as buttons randomly
-// . On click for all buttons and special effect for right button
-// . Redo
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
