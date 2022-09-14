@@ -83,7 +83,7 @@
 
             <div style="position: relative; top: 70px;">
                 <div>
-                    <h2 id="question" class="center-horizontal" style="width: 380px; text-align: center; height: 80px; background-color: var(--element-color); color: aliceblue; border-radius: 15px 15px 15px 15px; vertical-align: middle; padding-top: 15px;">Which card is assosiated with the phrase <span style="color: rgb(228, 173, 100);">a steak</span></h1>
+                    <h2 id="question" class="center-horizontal" style="width: 380px; text-align: center; height: 80px; background-color: var(--element-color); color: aliceblue; border-radius: 15px 15px 15px 15px; vertical-align: middle; padding-top: 15px;">Which card is assosiated with the phrase <span style="color: rgb(228, 173, 100);">a steak</span></h2>
                 </div>
 
                 <ul class="wrap" style="list-style-type:none; position: relative; top: 120px; font-size: 40px; color: aliceblue; padding-top: 45px; right: 22px">
@@ -98,7 +98,7 @@
                     </li>
                     <li style="padding-top: 15px;">
                         <input class="choice" id="3choice" type="image" src="/static/cards/k4.png" onclick="clicked(3);" />
-                    </li style="padding-top: 15px;">
+                    </li>
                 </ul>
             </div>
         </div>
@@ -139,7 +139,10 @@
         <button class="center-horizontal" style="position: absolute; bottom: 20px; display: none;" id="rehersal-button" onclick="rehersal();">Rehersal</button>
     
         <span>
-            <ul style="list-style: none; margin: 0; padding: 5px; color: aliceblue; columns: 2; -webkit-columns: 2; -moz-columns: 2; height: 100%;" id="cardList">
+            <ul style="list-style: none; margin: 0; padding: 5px; color: aliceblue; height: 100vh; column-count: 2s;" id="cardList">
+            </ul>
+            <ul id="cardList2" style="list-style: none; margin: 0; position: absolute; top: 5px; right: 5px; color: aliceblue; height: 100vh; column-count: 2s;">
+
             </ul>
         </span>
     </div>

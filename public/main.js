@@ -22,14 +22,14 @@ fetch("/static/cards.json").then(response => response.json()).then((json) => {
             let data = JSON.parse(localStorage.getItem("cards"))[element];
 
             if (Object.keys(JSON.parse(localStorage.getItem("cards"))).indexOf(element) > 25) {
-                document.getElementById("cardList").innerHTML += `
+                document.getElementById("cardList2").innerHTML += `
                 <li id="${element}" style="position: relative;">
-                    <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${element}" style="width: 22px; vertical-align: middle"></p>
+                    <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${element}" style="width: calc(50vh / 26); vertical-align: middle"></p>
                 </li>`;
             } else {
                 document.getElementById("cardList").innerHTML += `
                 <li id="${element}">
-                    <p style="margin: 2px;"><img src="/static/cards/${element}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+                    <p style="margin: 2px;"><img src="/static/cards/${element}" style="width: calc(60vh / 26); vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
                 </li>`;
             }
 
@@ -57,7 +57,7 @@ function nextCard() {
 
     if (!savedCard[Object.keys(cardData)[cardIndex]]) {
         if (Object.keys(savedCard).length > 26) {
-            document.getElementById("cardList").innerHTML += `
+            document.getElementById("cardList2").innerHTML += `
             <li id="${Object.keys(cardData)[cardIndex]}" style="position: relative;">
                 <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle"></p>
             </li>`;
