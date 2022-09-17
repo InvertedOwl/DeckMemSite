@@ -24,7 +24,7 @@ fetch("/static/cards.json").then(response => response.json()).then((json) => {
             if (Object.keys(JSON.parse(localStorage.getItem("cards"))).indexOf(element) > 25) {
                 document.getElementById("cardList2").innerHTML += `
                 <li id="${element}" style="position: relative;">
-                    <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${element}" style="width: calc(50vh / 26); vertical-align: middle"></p>
+                    <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${element}" style="width: calc(60vh / 26); vertical-align: middle"></p>
                 </li>`;
             } else {
                 document.getElementById("cardList").innerHTML += `
@@ -59,12 +59,12 @@ function nextCard() {
         if (Object.keys(savedCard).length > 26) {
             document.getElementById("cardList2").innerHTML += `
             <li id="${Object.keys(cardData)[cardIndex]}" style="position: relative;">
-                <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle"></p>
+                <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: calc(60vh / 26); vertical-align: middle"></p>
             </li>`;
         } else {
             document.getElementById("cardList").innerHTML += `
             <li id="${Object.keys(cardData)[cardIndex]}">
-                <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+                <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: calc(60vh / 26); vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
             </li>`;
         }
 
@@ -72,10 +72,10 @@ function nextCard() {
 
     } else {
         if (cardIndex > 25) {
-            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `        <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle"></p>
+            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `        <p style="margin: 2px; text-align: right;">  ${data.person} || ${data.verb} || ${data.thing} <img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: calc(60vh / 26); vertical-align: middle"></p>
             `
         } else {
-            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `         <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: 22px; vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
+            document.getElementById(Object.keys(cardData)[cardIndex]).innerHTML = `         <p style="margin: 2px;"><img src="/static/cards/${Object.keys(cardData)[cardIndex]}" style="width: calc(60vh / 26); vertical-align: middle">  ${data.person} || ${data.verb} || ${data.thing}</p>
 
             `
         }

@@ -20,6 +20,7 @@
             column-count: 2;
         }
         body {
+            touch-action: manipulation;
             background-color: var(--main-bg-color);
             margin: 0;
             font-family: Helvetica;
@@ -116,9 +117,9 @@
             <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 15px; padding: 0;">Encoding</h1>
         </div>
 
-        <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 150px;" id="cardImg">
+        <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 20vh;" id="cardImg">
 
-        <div style="position: relative; bottom: -627px;">
+        <div style="position: relative; top: 80vh;">
             <div class="center-horizontal" style="bottom: 230px;">
                 <div style="position: relative; right: 21px">
                     <input type="image" src="/static/icons8-refresh-60.png" name="saveForm" class="btTxt submit" id="saveForm" style="position: relative; top: 2.5px; width:40px; height: 40px; display: inline;" onclick="randomize();"/>
