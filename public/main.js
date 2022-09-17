@@ -121,11 +121,29 @@ function randomize() {
 function rehersal() {
     document.getElementById("Encoding").style.display = "none";
     document.getElementById("Rehearsal").style.display = "block";
+    document.getElementById("Test").style.display = "none";
     newQuestion();
 }
 function encoding() {
     document.getElementById("Encoding").style.display = "block";
     document.getElementById("Rehearsal").style.display = "none";
+    document.getElementById("Test").style.display = "none";
+}
+
+let testIndex;
+let testArray;
+
+function test() {
+    document.getElementById("Encoding").style.display = "none";
+    document.getElementById("Rehearsal").style.display = "none";
+    document.getElementById("Test").style.display = "block";
+
+    testIndex = 0;
+    testArray = Object.keys(cardData);
+    shuffleArray(testArray);
+    console.log(testArray + " WOAH")
+
+    updateTest();
 }
 
 let correctId = 0;
@@ -180,4 +198,26 @@ function shuffleArray(array) {
         array[i] = array[j];
         array[j] = temp;
     }
+    return array;
+}
+
+
+
+
+function lastCardTest() {
+    if (testIndex > 0) {
+        testIndex -= 1;
+    }
+    updateTest();
+}
+function nextCardTest() {
+
+    if (testIndex < 51) {
+        testIndex += 1;
+    }
+    updateTest();
+}
+
+function updateTest() {
+    document.getElementById("cardImgTest").src = "/static/cards/" + testArray[testIndex];
 }

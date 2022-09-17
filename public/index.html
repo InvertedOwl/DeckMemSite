@@ -3,11 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
     <script src="/static/main.js" async defer></script>
     <link rel="icon" type="image/x-icon" href="static/output-onlinepngtools.png">
     <title>DeckMem</title>
     <style>
+
+        @media (pointer:none), (pointer:coarse) {
+            #cardList {
+                display: none !important;
+            }
+            #cardList2 {
+                display: none !important;
+            }
+            .btTxt {
+                display: none !important;
+            }
+            .inputMain {
+                margin-top: 15px !important;
+                height: 20px;
+            }
+            .firstInput {
+                position: relative !important; right: -21px !important;
+            }
+
+            #bo1 {
+                bottom: 230px !important;
+            }
+            #bo2 {
+                bottom: calc(230px - 40px) !important;
+            }
+            #bo3 {
+                bottom: calc(230px - 80px) !important;
+
+            }
+
+            .next {
+                bottom: 15px !important;
+            }
+            #next1 {
+                left: 25vw !important;
+            }
+            #next2 {
+                left: 75vw !important;
+            }
+            /* body, html {
+                overflow: hidden;
+            }
+            /* body {
+                position: relative;
+            } */ 
+            #rehersal-button {
+                bottom: 80px !important;
+                text-align: center !important;
+                color: gray !important;
+            }
+
+            .bandaid {
+                position: relative;
+                right: 17px;
+                color: gray !important;
+
+            }
+            #question {
+                position: relative;
+                top: -10px;
+                width: 90vw !important;
+            }
+            .wrap {
+                position: relative !important;
+                top: -70px !important;
+            }
+            .choice {
+                position: relative !important;
+                top: 0px !important;
+            }
+
+        }
 
         :root {
             --main-bg-color: #3a4969;
@@ -20,7 +93,7 @@
             column-count: 2;
         }
         body {
-            touch-action: manipulation;
+            touch-action: none !important;
             background-color: var(--main-bg-color);
             margin: 0;
             font-family: Helvetica;
@@ -52,10 +125,11 @@
         }
 
         .choice {
-            height: calc(90px * 1.6); width: calc(65px * 1.6); border-radius: 0;
+            height: calc(90px * 1.2); width: calc(65px * 1.2); border-radius: 0;
             position: relative;
-            left: 30px;
-            top: 0px;
+            left: 50%;
+            top: -15px;
+            transform: translate(-50%, 0);
             
         }
 
@@ -76,13 +150,23 @@
     </div> -->
 
 
+    <div id="Test" style="display: none;">
+        <div class="heading center-horizontal" style="background-color:var(--element-color); width: 400px; height: 70px;">
+            <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 15px; padding: 0;">Test</h1>
+        </div>
+
+        <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 35vh" id="cardImgTest">
+
+        <button class="center-horizontal next" style="z-index: 10; bottom: 60px; left: 40vw; background-color: rgb(168, 78, 78);" onclick="lastCardTest();" id="next1">Back</button>
+        <button class="center-horizontal next" style="z-index: 10; bottom: 60px; left: 60vw; background-color: rgb(65, 174, 65);" onclick="nextCardTest();" id="next2">Next</button>   
+    </div>
 
     <div id="Rehearsal" style="display: none;">
         <p style="margin: 5px; color: white; position: absolute;">Percent acurate:<br><span id="percent">0%</span></p>
         <div class="heading center-horizontal" style="background-color:var(--element-color); width: 400px; height: 70px;">
             <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 15px; padding: 0;">Rehearsal</h1>
 
-            <div style="position: relative; top: 70px;">
+            <div id="everythin" style="position: relative; top: 70px;">
                 <div>
                     <h2 id="question" class="center-horizontal" style="width: 380px; text-align: center; height: 80px; background-color: var(--element-color); color: aliceblue; border-radius: 15px 15px 15px 15px; vertical-align: middle; padding-top: 15px;">Which card is assosiated with the phrase <span style="color: rgb(228, 173, 100);">a steak</span></h2>
                 </div>
@@ -104,10 +188,10 @@
             </div>
         </div>
         <div class="center-horizontal" style="position: absolute; bottom: 20px; display: block;">
-            <button onclick="encoding();" style="position: relative; right: 100px;">Encoding</button>
+            <button onclick="encoding();" style="position: relative; right: 100px;"><span class="bandaid">Encoding</span></button>
         </div>
         <div class="center-horizontal" style="position: absolute; bottom: 20px; display: block;">
-            <button style="position: relative; left: 100px;" onclick="rehersal();">Full Test</button>
+            <button style="position: relative; left: 100px;" onclick="test();"><span style="color: gray">Test</span></button>
         </div>
     </div>
 
@@ -117,27 +201,27 @@
             <h1 class="center-horizontal" style="color: aliceblue; margin: 0; margin-top: 15px; padding: 0;">Encoding</h1>
         </div>
 
-        <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 20vh;" id="cardImg">
+        <img src="/static/cards/k10.png" alt="" class="center-horizontal card" style="top: 90px; width: 15vh" id="cardImg">
 
-        <div style="position: relative; top: 80vh;">
-            <div class="center-horizontal" style="bottom: 230px;">
-                <div style="position: relative; right: 21px">
+        <div style="position: relative; top: 89vh;">
+            <div class="center-horizontal" style="bottom: 230px;" id="bo1">
+                <div style="position: relative; right: 21px" >
                     <input type="image" src="/static/icons8-refresh-60.png" name="saveForm" class="btTxt submit" id="saveForm" style="position: relative; top: 2.5px; width:40px; height: 40px; display: inline;" onclick="randomize();"/>
         
-                    <input type="text" name="" placeholder="Noun (Person)" style="position: relative; bottom: 10px;" id="person">
+                    <input type="text" name="" class="inputMain firstInput" placeholder="Noun (Person)" style="position: relative; bottom: 10px;" id="person">
                 </div>
             </div>
-            <div class="center-horizontal" style="bottom: 170px;">
-                <input type="text" name="" placeholder="Verb (With ing)" style="position: relative; bottom: 10px;" id="verb">
+            <div class="center-horizontal" style="bottom: 170px;" id="bo2">
+                <input type="text" name="" class="inputMain" placeholder="Verb (With ing)" style="position: relative; bottom: 10px;" id="verb">
             </div>
-            <div class="center-horizontal" style="bottom: 110px;">
-                <input type="text" name="" placeholder="Noun (Thing)" style="position: relative; bottom: 10px;" id="thing">
+            <div class="center-horizontal" style="bottom: 110px;"id="bo3">
+                <input type="text" name="" class="inputMain" placeholder="Noun (Thing)" style="position: relative; bottom: 10px;" id="thing">
             </div>
-            <button class="center-horizontal" style="z-index: 10; bottom: 60px; left: 42vw; background-color: rgb(168, 78, 78);" onclick="lastCard();">Back</button>
-            <button class="center-horizontal" style="z-index: 10; bottom: 60px; left: 58vw; background-color: rgb(65, 174, 65);" onclick="nextCard();">Next</button>   
+            <button class="center-horizontal next" style="z-index: 10; bottom: 60px; left: 40vw; background-color: rgb(168, 78, 78);" onclick="lastCard();" id="next1">Back</button>
+            <button class="center-horizontal next" style="z-index: 10; bottom: 60px; left: 60vw; background-color: rgb(65, 174, 65);" onclick="nextCard();" id="next2">Next</button>   
         </div>
     
-        <button class="center-horizontal" style="position: absolute; bottom: 20px; display: none;" id="rehersal-button" onclick="rehersal();">Rehersal</button>
+        <button class="center-horizontal" style="position: absolute; bottom: 20px; display: none;" id="rehersal-button" onclick="rehersal();"> <span class="bandaid">Rehearsal</span></button>
     
         <span>
             <ul style="list-style: none; margin: 0; padding: 5px; color: aliceblue; height: 100vh; column-count: 2s;" id="cardList">
